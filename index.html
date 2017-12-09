@@ -10,6 +10,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="styles.css">
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 
   <!-- Scripts -->
@@ -22,30 +23,36 @@
 
 <script src="scripts.js"></script>
 
-
 <body>
+
+  <ul id="dropdown1" class="dropdown-content">
+</ul>
     <nav>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper blue">
         <a href="#" class="brand-logo">Feiner Trends</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul id="nav-mobile" class="right">
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" id="dropdown-zone" href="#!" data-activates="dropdown1">Past Searches<i class="material-icons right"></i></a></li>
+  
         </ul>
       </div>
     </nav>
  <div class="row">
-    <div class="col s12"><p>Scrolling Trends Here</p>
-
+    <div class="col s12"><p>
+    <!--<marquee behavior="scroll" direction="left"> <p id="trends"></p> </marquee> -->
+    <marquee behavior="scroll" direction="left" id="trends">  </marquee>
+    </p>
     </div>
-
   
     <div class="row">
-      <div class="col s6 #ffcdd2 red lighten-4">
+      <div class="col s6 #e1f5fe light-blue lighten-5">
       <header>
     <h4>New York</h4>
       </div>
-      <div class="col s6 #ffebee red lighten-5"><h4>United States</h4>
+      <div class="col s6 #b3e5fc light-blue lighten-4"><h4>United States</h4>
       
 <div class="row">
-    <form class="col s12">
+    <form id="getTweetRequest" class ="col s12">
       <div class="row">
         <div class="input-field col s12">
           <input placeholder="#NYC" id="hashtag" type="text" class="validate">
@@ -83,9 +90,6 @@
 
    
 <!-- TO DO: Make marquee list of trending topics here  -->
-
-
-
 
   <script src="scripts.js"></script>
   <script type="text/javascript" src="codebird.js"></script>
