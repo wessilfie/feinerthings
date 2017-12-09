@@ -42,7 +42,7 @@ cb.__call("trends_place",
               if(typeof trend_set != "undefined") {
                 /* we'll make a list of trending topics */
                 for(var trend in trend_set) {
-                	var hyperlink = "<a href=\"" + trend_set[trend].url + "\">"  + trend_set[trend].name + "</a>  \xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+                	var hyperlink = "<a href=\"" + trend_set[trend].url + "\" target=\"_blank\">"  + trend_set[trend].name + "</a>  \xa0\xa0\xa0\xa0\xa0\xa0\xa0";
                   	trend_list += (hyperlink + "\t");
                 }
               }
