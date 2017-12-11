@@ -85,10 +85,10 @@ $(document).ready(function() {
     e.preventDefault(); //prevent a submit button from submitting a form.
     var hashtag =  document.getElementById("hashtag").value;
     var location = document.getElementById("location").value;
-    //var result = convertLocationToWOEID(location);
-    //getUSTopTrends();
     getTweets();
-    pastSearches += "<li> <a href=\"#\">" + hashtag + "</a></li>";
+    hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+    var hashtag_link = "https://twitter.com/hashtag/" + hashtag;
+    pastSearches += "<li> <a href=\"" + hashtag_link +  "\" target=\"_blank\">" + hashtag + "</a></li>";
   })});
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -102,6 +102,7 @@ document.getElementById('dropdown-zone').onmouseover = function() {
       document.getElementById('dropdown1').innerHTML = "<li> <a href=\"#\"> None</a></li>";
     }
     else {
+
     document.getElementById('dropdown1').innerHTML = pastSearches;
   }
 }; 
