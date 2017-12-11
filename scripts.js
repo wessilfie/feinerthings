@@ -55,29 +55,61 @@ cb.__call("trends_place",
 }
 
 
-function getTweets() {
+function getTweets(hashtag, place) {
 cb.__call("search_tweets", 
 
-  {q: "#FollowTheComet",
-  place: "795003fb11ee9829",
+  {q: hashtag,
+  place: place,
   count: 100
   },
   
   function(result){
   	console.log(result);
-    /*var statuses = result && result.statuses;
+    var statuses = result && result.statuses;
     if (statuses && Array.isArray(statuses) && statuses.length)
     {
+
       $(".tweet_entry").html("");
       statuses.forEach(function (status) {
-        $('tweet_entry').append("formatting");
+
+        console.log(JSON.stringify(status['text'], null, 4))
+        tweet_text = JSON.stringify(status['text'], null, 4)
+        console.log('<pre><p width:50px;word-break:break-word;>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" >User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' +'</pre>')
+        $('.tweet_entry').append('<p>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>');
       })
     
-    } */
+    } 
   }
   
   )
+}
 
+  function getUSTweets(hashtag) {
+  cb.__call("search_tweets", 
+
+    {q: hashtag,
+    place: "795003fb11ee9829",
+    count: 100
+    },
+    
+    function(result){
+      console.log(result);
+      var statuses = result && result.statuses;
+      if (statuses && Array.isArray(statuses) && statuses.length)
+      {
+        console.log("in loop");
+        $(".tweet_us_entry").html("");
+        statuses.forEach(function (status) {
+          console.log("doing for each ");
+          console.log(JSON.stringify(status['text'], null, 4))
+          tweet_text = JSON.stringify(status['text'], null, 4)
+          $('.tweet_us_entry').append('<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>');
+        })
+      
+      } 
+    }
+    
+    )
 
 }
 $(document).ready(function() {
@@ -85,8 +117,12 @@ $(document).ready(function() {
     e.preventDefault(); //prevent a submit button from submitting a form.
     var hashtag =  document.getElementById("hashtag").value;
     var location = document.getElementById("location").value;
-    getTweets();
+    document.getElementById("location_name").innerHTML = location;
     hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+    console.log('hashtag: ' + hashtag);
+    location_name
+    getUSTweets('#' + hashtag);
+    getTweets('$' + hashtag, location);
     var hashtag_link = "https://twitter.com/hashtag/" + hashtag;
     pastSearches += "<li> <a href=\"" + hashtag_link +  "\" target=\"_blank\">" + hashtag + "</a></li>";
   })});
