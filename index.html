@@ -141,6 +141,29 @@
                 </form>
             </div>
             <div class = "row" style="word-wrap:break-word;">
+                <!-- Loading: Spinner & Label -->
+                <div class="loading-state">
+                    <div class="preloader-wrapper small active" role="spinbutton">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="flow-text" role="label">Loading data...</p>
+                </div>
+
+
+                <!-- Error message -->
+                <div class="output-error-state">
+                    <p class="flow-text output-error-msg">Sorry, no tweets were found. Try searching another trend!</p>
+                </div>
+
+                <!-- STATE TWEETS -->
                 <ul class = "tweet_entry" style="word-wrap:break-word;"></ul>
             </div>
         </div>
@@ -151,8 +174,31 @@
                 <div id="map" style="width: 350px; height: 250px;"></div>
                 <div id="clicked-state"></div>
                 <div class = "row">
-                    <ul class = "tweet_us_entry">   </ul>
 
+                    <!-- Loading: Spinner & Label -->
+                    <div class="loading-us">
+                        <div class="preloader-wrapper small active" role="spinbutton">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="flow-text" role="label">Loading data...</p>
+                    </div>
+
+
+                    <!-- Error message -->
+                    <div class="output-error-us">
+                        <p class="flow-text output-error-msg">Sorry, no tweets were found. Try searching another trend!</p>
+                    </div>
+
+                    <!-- US TWEETS -->
+                    <ul class = "tweet_us_entry">   </ul>
                 </div>
             </div>
         </div>
