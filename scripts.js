@@ -63,6 +63,8 @@ cb.__call("trends_place",
 
 
 function getTweets(hashtag, place) {
+$(".tweet_entry").html("");
+$('.tweet_entry').append("Loading results...");
 cb.__call("search_tweets",
 
   {q: hashtag,
@@ -132,6 +134,8 @@ cb.__call("search_tweets",
 }
 
   function getUSTweets(hashtag) {
+  $(".tweet_us_entry").html("");
+  $('.tweet_us_entry').append("Loading results...");
   cb.__call("search_tweets",
 
     {q: hashtag,
@@ -204,15 +208,15 @@ $(document).ready(function() {
     hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
     console.log('hashtag: ' + hashtag);
     location_name
-    if (location != "" && hashtag != ""){ 
+    if (location != ""){ 
     getUSTweets(hashtag);
     getTweets(hashtag, location);
     var hashtag_link = "https://twitter.com/hashtag/" + hashtag;
     pastSearches += "<li> <a href=\"" + hashtag_link +  "\" target=\"_blank\">" + hashtag + "</a></li>";
   }
   else{
-    $(".tweet_us_entry").html("");
-    $('.tweet_us_entry').append("Sorry, no tweets were found. Try searching another trend!");
+    $(".tweet_entry").html("");
+    $('.tweet_entry').append("Please select a location.");
   }
 })});
 
