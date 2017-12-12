@@ -11,19 +11,18 @@ $(document).ready(function() {
   });
 
 function getTrends(location) {
+try{
 
 cb.__call("trends_place",
             /* expects a WOEID or 1 for worldwide; we currently default to U.S. */
           {id: location},
 
           function (result_trends){
+            
 
             document.getElementById("state_trends").innerHTML = "No trends found for this state.";
             console.log(result_trends);
             var trend_list = "";
-            if (result_trends[0].hasOwnProperty('state_trends')){
-
-            
             var trend_set = result_trends[0].trends;
               if(typeof trend_set != "undefined") {
                 /* we'll make a list of trending topics */
@@ -38,8 +37,7 @@ cb.__call("trends_place",
                     trend_list += (hyperlink + "\t");
                 }
               }
-
-            }
+            
               else {
                 //if we can't get trends, make a default list
                 var trend_list = "We're currently having issues pulling current trends.";
@@ -47,7 +45,13 @@ cb.__call("trends_place",
 
 
             document.getElementById("state_trends").innerHTML = trend_list;
+          
           });
+}
+catch(err) {
+            document.getElementById("state_trends").innerHTML = "NOT WORKING";
+
+          }
 }
 
 
