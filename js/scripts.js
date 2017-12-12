@@ -84,6 +84,7 @@ cb.__call("search_tweets",
 
   {q: hashtag,
   place: place,
+  result_type: 'recent',
   count: 100
   },
 
@@ -159,6 +160,7 @@ cb.__call("search_tweets",
 
     {q: hashtag,
     place: "795003fb11ee9829",
+    result_type: 'mixed', 
     count: 100
     },
 
