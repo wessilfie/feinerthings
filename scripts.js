@@ -1,11 +1,18 @@
-
+var pastSearches = "";
 var cb = new Codebird;
 cb.setConsumerKey("ofdAXrcTiEuYqdVbcoKZyQnY3", "P8t5gf74e34LEfwegBgiI9CAUNST5GTwZiVv9zyzB1eB715Aki");
 cb.setToken("938839151469846528-6ZBo150bCCn5Kiz8jbNcTJi0ohJywn3", "Lr3cDAzo42p7MACH9WQgkRmLNFPlxVy8PkewRqXPv0u0n");
 
-function convertLocationToWOEID(location) {
+function pastSearches() {
+  console.log("here");
+  //$('dropdown1').append(pastSearches);
+  //document.getElementById('dropdown1').innerHTML = past_searches;
+}
 
-	
+
+
+
+function convertLocationToWOEID(location) {
 cb.__call("geo_search",
           { query: location},
           function (result_location){
@@ -30,20 +37,20 @@ cb.__call("trends_place",
             /* expects a WOEID or 1 for worldwide; we currently default to U.S. */ 
           {id: 23424977},
           function (result_trends){
-          	var trend_list = [];
+          	var trend_list = "";
           	var trend_set = result_trends[0].trends;
               if(typeof trend_set != "undefined") {
                 /* we'll make a list of trending topics */
                 for(var trend in trend_set) {
-                	var hyperlink = "<a href=\"" + trend_set[trend].url + "\">"  + trend_set[trend].name + "</a>";
-                  	trend_list.push(hyperlink);
+                	var hyperlink = "<a href=\"" + trend_set[trend].url + "\" target=\"_blank\">"  + trend_set[trend].name + "</a>  \xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+                  	trend_list += (hyperlink + "\t");
                 }
               }
               else {
                 //if we can't get trends, make a default list
-                var trend_list = ["columbia university","#prezbo", "steven feiner", "#pleaseGiveUsAGoodGrade", "morningside heights", "#harlem", "#ADI", "#TheLion"];
+                var trend_list = "We're currently having issues pulling current trends.";
               }
-            console.log(trend_list);
+            document.getElementById("trends").innerHTML = trend_list;
           });
 }
 
@@ -78,10 +85,28 @@ $(document).ready(function() {
     e.preventDefault(); //prevent a submit button from submitting a form.
     var hashtag =  document.getElementById("hashtag").value;
     var location = document.getElementById("location").value;
-    //var result = convertLocationToWOEID(location);
-    //getUSTopTrends();
     getTweets();
+    hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+    var hashtag_link = "https://twitter.com/hashtag/" + hashtag;
+    pastSearches += "<li> <a href=\"" + hashtag_link +  "\" target=\"_blank\">" + hashtag + "</a></li>";
   })});
+
+document.addEventListener('DOMContentLoaded', function() {
+   getUSTopTrends();
+}, false);
+
+
+window.onload=function(){
+document.getElementById('dropdown-zone').onmouseover = function() {
+    if (pastSearches.length < 1) {
+      document.getElementById('dropdown1').innerHTML = "<li> <a href=\"#\"> None</a></li>";
+    }
+    else {
+
+    document.getElementById('dropdown1').innerHTML = pastSearches;
+  }
+}; 
+};
 
 
 
