@@ -223,8 +223,8 @@ $(document).ready(function() {
     hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
     console.log('hashtag: ' + hashtag);
     location_name
-    getUSTweets('#' + hashtag);
-    getTweets('$' + hashtag, location);
+    getUSTweets(hashtag);
+    getTweets(hashtag, location);
     var hashtag_link = "https://twitter.com/hashtag/" + hashtag;
     pastSearches += "<li> <a href=\"" + hashtag_link +  "\" target=\"_blank\">" + hashtag + "</a></li>";
   })});
