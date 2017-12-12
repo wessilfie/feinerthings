@@ -10,33 +10,35 @@ $(document).ready(function() {
     $('select').material_select();
   });
 
-function pastSearches() {
-  console.log("here");
-  //$('dropdown1').append(pastSearches);
-  //document.getElementById('dropdown1').innerHTML = past_searches;
-}
+function getTrends(location) {
 
-
-
-
-function convertLocationToWOEID(location) {
-cb.__call("geo_search",
-          { query: location},
-          function (result_location){
-              console.log(result_location);
-              if(typeof result_location.result != "undefined") {
-                /* we'll just take first location returned by Twitter */
-                var location_id = result_location.result.places[0].id;
+cb.__call("trends_place",
+            /* expects a WOEID or 1 for worldwide; we currently default to U.S. */
+          {id: location},
+          function (result_trends){
+            console.log(result_trends);
+            var trend_list = "";
+            var trend_set = result_trends[0].trends;
+              if(typeof trend_set != "undefined") {
+                /* we'll make a list of trending topics */
+                for(var trend in trend_set) {
+                  var hyperlink = "<a href=\"" + trend_set[trend].url + "\" target=\"_blank\">"  + trend_set[trend].name + "</a>  \xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+                    trend_list += (hyperlink + "\t");
+                }
               }
               else {
-                //if we can't get a location, default to Lerner Hall area
-                var location_id = "23679372";
+                //if we can't get trends, make a default list
+                var trend_list = "We're currently having issues pulling current trends.";
               }
-});
-
-
-
+            document.getElementById("trends").innerHTML = trend_list;
+          });
 }
+
+
+
+
+
+
 
 function getUSTopTrends() {
 
@@ -218,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.onload=function(){
   $('#map').usmap({
     'click': function(event, data) {
-      console.log("yo im here in " + data.name);
+      getTrends(state_dict[data.name]);
   }
       }
   );
@@ -232,4 +234,60 @@ document.getElementById('dropdown-zone').onmouseover = function() {
   }
 };
 };
+
+var state_dict = 
+
+{
+ "AL":      2453369 ,
+ "AK":      2354490 ,
+ "AZ":      2471390 ,
+ "AR":      2440351 ,
+ "CA":      2487956 ,
+ "CO":      2391279 ,
+ "CT":      2458410 ,
+ "DE":      2459115 ,
+ "FL":      2457170 ,
+ "GA":      2347569 ,
+ "HI":      2347570 ,
+ "ID":      2381475 ,
+ "IL":      2379574 ,
+ "IN":      2427032 ,
+ "IA":      2391446 ,
+ "KS":      2466942 ,
+ "KY":      2442327 ,
+ "LA":      2458833 ,
+ "ME":      2429187 ,
+ "MD":      2358820 ,
+ "MA":      2367105 ,
+ "MI":      2391585 ,
+ "MN":      2452078 ,
+ "MS":      2430683 ,
+ "MO":      2430683 ,
+ "MT":      2364254 ,
+ "NE":      2352824 ,
+ "NV":      2436704 ,
+ "NH":      2444674 ,
+ "NJ":      2459269 ,
+ "NM":      2352824 ,
+ "NY":      2459115 ,
+ "NC":      2478307 ,
+ "ND":      2478307 ,
+ "OH":      2380358 ,
+ "OK":      2460448 ,
+ "OR":      2475687 ,
+ "PA":      2471217 ,
+ "RI":      2477058 ,
+ "SC":      2378319 ,
+ "SD":      2380893 ,
+ "TN":      2380893 ,
+ "TX":      2397816 ,
+ "UT":      2517863 ,
+ "VT":      2402726 ,
+ "VA":      2512636 ,
+ "WA":      2490383 ,
+ "WV":      2443945 ,
+ "WI":      2443945 ,
+ "WY":      2423945 
+};
+
 
