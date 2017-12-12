@@ -6,3 +6,27 @@
   width: 100%;
   height: 300px;
 }
+
+.trends-row {
+    margin-bottom: 0;
+}
+
+.trends-icon {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 54.5px
+}
+
+.trends-wrapper p {
+    padding: 0 1rem;
+}
+
+/*OVERRIDES FOR MATERIALIZE CSS*/
+nav .brand-logo {
+    position: absolute;
+    color: #fff;
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 0 1.5rem;
+}

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Scripts -->
   <script src="https://use.fontawesome.com/2906dd2f3e.js"></script>
@@ -22,6 +23,9 @@
   <script src="https://www.amcharts.com/lib/3/maps/js/usaLow.js"></script>
   <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
   <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+  <!-- Bootstrap core CSS -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
 </head>
 
 <script src="scripts.js"></script>
@@ -31,7 +35,7 @@
   <ul id="dropdown1" class="dropdown-content">
 </ul>
     <nav>
-      <div class="nav-wrapper blue">
+      <div class="nav-wrapper blue z-depth-2">
         <a href="#" class="brand-logo">Feiner Trends</a>
         <ul id="nav-mobile" class="right">
       <!-- Dropdown Trigger -->
@@ -40,22 +44,24 @@
         </ul>
       </div>
     </nav>
- <div class="row">
-    <div class="col s12"><p>
+    <div class="row trends-row">
+        <div class="col s2 trends-icon z-depth-2">
+            <i class="material-icons">lightbulb_outline</i>
+            <p class="">Current Trends:</p>
+        </div>
+    <div class="col s10 trends-wrapper">
+        <p>
     <!--<marquee behavior="scroll" direction="left"> <p id="trends"></p> </marquee> -->
-    <marquee behavior="scroll" direction="left" id="trends">  </marquee>
-    </p>
+            <marquee behavior="scroll" direction="left" id="trends">  </marquee>
+        </p>
     </div>
+  </div>
 
+  <div class="row">
+
+  <div class="col s6 #b3e5fc light-blue lighten-4">
+    <h4 id = "location_name">Input Location Name</h4>
     <div class="row">
-      <div class="col s6 #e1f5fe light-blue lighten-5">
-      <header>
-    <h4>New York</h4>
-      </div>
-      <div class="col s6 #b3e5fc light-blue lighten-4"><h4>United States</h4>
-          <div id="chartdiv"></div>
-
-<div class="row">
     <form id="getTweetRequest" class ="col s12">
       <div class="row">
         <div class="input-field col s12">
@@ -66,12 +72,43 @@
           <input placeholder="New York, NY" id="location" type="text" class="validate">
           <label for="location">Location</label>
         </div>
+      </div>
         <button type="submit">Get Tweets</button>
         </form>
     <br>
 
+
+       <div class = "row" style="word-wrap:break-word;">
+        <ul class = "tweet_entry" style="word-wrap:break-word;">   </ul>
+
       </div>
-       </div>
+
+     </div>
+   </div>
+
+    <div class="col s6 #e1f5fe light-blue lighten-5">
+      <header>
+      <h4>United States</h4>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class = "row">
+        <ul class = "tweet_us_entry">   </ul>
+
+      </div>
+    </div>
+ </div>
+
+
+
+
 
   <!--
     <footer class="page-footer">
