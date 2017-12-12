@@ -15,11 +15,30 @@
     display: flex;
     align-items: center;
     margin: 0;
-    height: 54.5px
+    height: 54.5px;
+    justify-content: space-evenly;
+}
+
+.trends-icon > p {
+    width: auto;
 }
 
 .trends-wrapper p {
     padding: 0 1rem;
+}
+
+/*Change color of form placeholder*/
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #1565c0;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #1565c0;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #1565c0;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #1565c0;
 }
 
 /*OVERRIDES FOR MATERIALIZE CSS*/
@@ -29,4 +48,8 @@ nav .brand-logo {
     display: inline-block;
     font-size: 2.1rem;
     padding: 0 1.5rem;
+}
+
+label {
+    font-weight: bold !important;
 }

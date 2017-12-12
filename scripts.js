@@ -3,6 +3,9 @@ var cb = new Codebird;
 cb.setConsumerKey("ofdAXrcTiEuYqdVbcoKZyQnY3", "P8t5gf74e34LEfwegBgiI9CAUNST5GTwZiVv9zyzB1eB715Aki");
 cb.setToken("938839151469846528-6ZBo150bCCn5Kiz8jbNcTJi0ohJywn3", "Lr3cDAzo42p7MACH9WQgkRmLNFPlxVy8PkewRqXPv0u0n");
 
+
+card_end = '</div>';
+
 function pastSearches() {
   console.log("here");
   //$('dropdown1').append(pastSearches);
@@ -24,7 +27,7 @@ cb.__call("geo_search",
               else {
                 //if we can't get a location, default to Lerner Hall area
                 var location_id = "23679372";
-              }      
+              }
 });
 
 
@@ -34,7 +37,7 @@ cb.__call("geo_search",
 function getUSTopTrends() {
 
 cb.__call("trends_place",
-            /* expects a WOEID or 1 for worldwide; we currently default to U.S. */ 
+            /* expects a WOEID or 1 for worldwide; we currently default to U.S. */
           {id: 23424977},
           function (result_trends){
           	var trend_list = "";
@@ -56,58 +59,96 @@ cb.__call("trends_place",
 
 
 function getTweets(hashtag, place) {
-cb.__call("search_tweets", 
+cb.__call("search_tweets",
 
   {q: hashtag,
   place: place,
   count: 100
   },
-  
+
   function(result){
-  	console.log(result);
+  	// console.log(result);
     var statuses = result && result.statuses;
     if (statuses && Array.isArray(statuses) && statuses.length)
     {
 
       $(".tweet_entry").html("");
       statuses.forEach(function (status) {
+        // console.log(JSON.stringify(status['text'], null, 4))
+        tweet_img = "";
+        if (typeof status.entities.media !== 'undefined') {
+            // there's media
+            media_type = status.entities.media[0].type;
+            if (media_type == "photo") {
+                // there's a photo
+                photo_url = status.entities.media[0].media_url;
+                console.log(photo_url);
+                tweet_img = '<div class="card-image">' + '<img src="' + photo_url + '">' + card_end;
+            }
 
-        console.log(JSON.stringify(status['text'], null, 4))
+        }
+
         tweet_text = JSON.stringify(status['text'], null, 4)
-        $('.tweet_entry').append('<p>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' + '<hr>');
+        // $('.tweet_entry').append('<p>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' + '<hr>');
+        card_begin = '<div class="card">' + tweet_img + '<div class="card-content">';
+        tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>';
+        card_link = '<div class="card-action">' +  '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + card_end;
+        tweet_card = card_begin + tweet_text + card_end + card_link + card_end;
+
+        $('.tweet_entry').append(tweet_card);
+
       })
-    
-    } 
+
+    }
   }
-  
+
   )
 }
 
   function getUSTweets(hashtag) {
-  cb.__call("search_tweets", 
+  cb.__call("search_tweets",
 
     {q: hashtag,
     place: "795003fb11ee9829",
     count: 100
     },
-    
+
     function(result){
-      console.log(result);
+      // console.log(result);
       var statuses = result && result.statuses;
       if (statuses && Array.isArray(statuses) && statuses.length)
       {
         console.log("in loop");
         $(".tweet_us_entry").html("");
         statuses.forEach(function (status) {
-          console.log("doing for each ");
-          console.log(JSON.stringify(status['text'], null, 4))
+            tweet_img = ""; // no img by default
+            if (typeof status.entities.media !== 'undefined') {
+                // there's media
+                media_type = status.entities.media[0].type;
+                if (media_type == "photo") {
+                    // there's a photo so isplay it
+                    photo_url = status.entities.media[0].media_url;
+                    console.log(photo_url);
+                    tweet_img = '<div class="card-image">' + '<img src="' + photo_url + '">' + card_end;
+                }
+            }
+          // console.log("doing for each ");
+          // console.log(JSON.stringify(status['text'], null, 4))
           tweet_text = JSON.stringify(status['text'], null, 4)
-          $('.tweet_us_entry').append('<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' + '<hr>');
+
+          card_begin = '<div class="card">' + tweet_img + '<div class="card-content">';
+          tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>';
+          card_link = '<div class="card-action">' +  '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + card_end;
+          tweet_card = card_begin + tweet_text + card_end + card_link + card_end;
+
+          $('.tweet_us_entry').append(tweet_card);
+
+          // $('.tweet_us_entry').append('<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>');
         })
-      
-      } 
+
+      }
     }
-    
+
     )
 
 }
@@ -140,8 +181,5 @@ document.getElementById('dropdown-zone').onmouseover = function() {
 
     document.getElementById('dropdown1').innerHTML = pastSearches;
   }
-}; 
 };
-
-
-
+};
