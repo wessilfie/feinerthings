@@ -11,7 +11,6 @@ $(document).ready(function() {
   });
 
 function getTrends(location) {
-try{
 
 cb.__call("trends_place",
             /* expects a WOEID or 1 for worldwide; we currently default to U.S. */
@@ -47,11 +46,7 @@ cb.__call("trends_place",
             document.getElementById("state_trends").innerHTML = trend_list;
           
           });
-}
-catch(err) {
-            document.getElementById("state_trends").innerHTML = "NOT WORKING";
 
-          }
 }
 
 
