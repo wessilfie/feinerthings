@@ -6,6 +6,10 @@ cb.setToken("938839151469846528-6ZBo150bCCn5Kiz8jbNcTJi0ohJywn3", "Lr3cDAzo42p7M
 
 card_end = '</div>';
 
+$(document).ready(function() {
+    $('select').material_select();
+  });
+
 function pastSearches() {
   console.log("here");
   //$('dropdown1').append(pastSearches);
