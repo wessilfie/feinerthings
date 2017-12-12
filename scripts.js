@@ -186,7 +186,12 @@ $(document).ready(function() {
     getTweets(hashtag, location);
     var hashtag_link = "https://twitter.com/hashtag/" + hashtag;
     pastSearches += "<li> <a href=\"" + hashtag_link +  "\" target=\"_blank\">" + hashtag + "</a></li>";
-  }})});
+  }
+  else{
+    $(".tweet_us_entry").html("");
+    $('.tweet_us_entry').append("Sorry, no tweets were found. Try searching another trend!");
+  }
+})});
 
 document.addEventListener('DOMContentLoaded', function() {
    getUSTopTrends();
