@@ -61,12 +61,35 @@ nav .nav-wrapper {
 }
 
 .tweet-btn {
+    color: white;
     background-color: #1da1f2 !important;
     border-radius: 4rem;
 }
 
 .tweet-btn:hover {
     background-color: #005fd1 !important;
+}
+
+marquee a:hover {
+    color: #005fd1 !important;
+}
+
+.footer-copyright {
+    background-color:
+}
+
+.col .search-box {
+    background-color: #f5f8fa;
+    padding: 1rem;
+    border-radius: .25rem;
+}
+
+.main-col {
+    padding: 1rem 2rem !important;
+}
+
+.rt-chip {
+
 }
 
 /*OVERRIDES FOR MATERIALIZE CSS*/
@@ -84,4 +107,8 @@ label {
 
 .input-field .prefix.active {
     color: #005fd1;
+}
+
+.card .card-action {
+    padding: .75rem 1rem;
 }
