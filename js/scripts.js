@@ -63,8 +63,6 @@ cb.__call("trends_place",
 
 
 function getTweets(hashtag, place) {
-$(".tweet_entry").html("");
-$('.tweet_entry').append("Loading results...");
 cb.__call("search_tweets",
 
   {q: hashtag,
@@ -104,9 +102,9 @@ cb.__call("search_tweets",
                         card_end;
 
         profile_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" >' + profile_chip + '</a>';
-        tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="">' +
-                      '<div class="chip tweet-btn">' +
-                      '<i class="fa fa-twitter" aria-hidden="true"></i>View Tweet</div>';
+        tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="at_end waves-effect waves-light btn tweet-btn">' +
+                      '<i class="fa fa-twitter" aria-hidden="true"></i>' +
+                      'View Tweet </a>';
 
         tweet_text = JSON.stringify(status['text'], null, 4)
         // $('.tweet_entry').append('<p>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' + '<hr>');
@@ -134,8 +132,6 @@ cb.__call("search_tweets",
 }
 
   function getUSTweets(hashtag) {
-  $(".tweet_us_entry").html("");
-  $('.tweet_us_entry').append("Loading results...");
   cb.__call("search_tweets",
 
     {q: hashtag,
@@ -174,18 +170,15 @@ cb.__call("search_tweets",
                           card_end;
 
           profile_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" >' + profile_chip + '</a>';
-          tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="">' +
-                        '<div class="chip tweet-btn">' +
-                        '<i class="fa fa-twitter" aria-hidden="true"></i>View Tweet</div></a>';
+          tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="at_end waves-effect waves-light btn tweet-btn">' +
+                        '<i class="fa fa-twitter" aria-hidden="true"></i>' +
+                        'View Tweet </a>';
 
           tweet_text = JSON.stringify(status['text'], null, 4)
           // $('.tweet_entry').append('<p>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' + '<hr>');
           card_begin = '<div class="card">' + tweet_img + '<div class="card-content">';
-          retweet_chip = '<div class="chip rt-chip">RT: ' +
-                          + status.retweet_count +
-                          card_end;
-          tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>Created at ' + status.created_at.slice(0,19) + '</em>';
-          card_link = '<div class="card-action">' + profile_link + tweet_link + retweet_chip + card_end;
+          tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>';
+          card_link = '<div class="card-action">' + profile_link + tweet_link + card_end;
           tweet_card = card_begin + tweet_text + card_end + card_link + card_end;
 
           $('.tweet_us_entry').append(tweet_card);
@@ -211,17 +204,11 @@ $(document).ready(function() {
     hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
     console.log('hashtag: ' + hashtag);
     location_name
-    if (location != ""){ 
-    getUSTweets(hashtag);
-    getTweets(hashtag, location);
+    getUSTweets('#' + hashtag);
+    getTweets('$' + hashtag, location);
     var hashtag_link = "https://twitter.com/hashtag/" + hashtag;
     pastSearches += "<li> <a href=\"" + hashtag_link +  "\" target=\"_blank\">" + hashtag + "</a></li>";
-  }
-  else{
-    $(".tweet_entry").html("");
-    $('.tweet_entry').append("Please select a location.");
-  }
-})});
+  })});
 
 document.addEventListener('DOMContentLoaded', function() {
    getUSTopTrends();
@@ -229,6 +216,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 window.onload=function(){
+  $('#map').usmap({
+    'click': function(event, data) {
+      console.log("yo im here in " + data.name);
+  }
+      }
+  );
 document.getElementById('dropdown-zone').onmouseover = function() {
     if (pastSearches.length < 1) {
       document.getElementById('dropdown1').innerHTML = "<li> <a href=\"#\"> None</a></li>";
@@ -239,3 +232,4 @@ document.getElementById('dropdown-zone').onmouseover = function() {
   }
 };
 };
+
