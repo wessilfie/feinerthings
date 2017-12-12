@@ -21,7 +21,7 @@ cb.__call("trends_place",
             document.getElementById("state_trends").innerHTML = "No trends found for this state.";
             console.log(result_trends);
             var trend_list = "";
-            if (result_trends[0].hasOwnProperty('trends')){
+            if (result_trends[0].hasOwnProperty('state_trends')){
 
             
             var trend_set = result_trends[0].trends;
