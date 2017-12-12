@@ -8,7 +8,7 @@ card_end = '</div>';
 
 $(document).ready(function() {
     $('select').material_select();
-  });
+});
 
 function getTrends(location) {
 

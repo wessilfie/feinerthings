@@ -55,7 +55,11 @@
         <div class="col s10 trends-wrapper">
             <p>
                 <!--<marquee behavior="scroll" direction="left"> <p id="trends"></p> </marquee> -->
-                <marquee behavior="scroll" direction="left" id="trends">  </marquee>
+                <marquee
+                    behavior="scroll"
+                    direction="left"
+                    id="trends"
+                    onmouseover="this.stop();" onmouseout="this.start();"></marquee>
             </p>
         </div>
     </div>
@@ -212,7 +216,7 @@
             <div class="footer-copyright indigo darken-3" role="banner">
                 <div class="container">
                     © 2017 Feiner Things (Emily Bau, Ivy Chen, Will Essilfie, Nancy Xu) | COMS4170 UI Design | Fall 2017
-                    <p>UI elements thanks to <a href="http://materializecss.com/">MaterializeCSS</a> and Twitter.</p>
+                    <p>UI elements thanks to <a href="http://materializecss.com/">MaterializeCSS</a> and <a href="https://twitter.com/">Twitter</a>.</p>
                 </div>
             </div>
         </footer>

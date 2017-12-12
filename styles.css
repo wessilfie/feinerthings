@@ -80,7 +80,7 @@ marquee a:hover {
 
 .col .search-box {
     background-color: #f5f8fa;
-    padding: 1rem;
+    padding: 1rem 1rem 2rem 1rem;
     border-radius: .25rem;
 }
 
@@ -90,6 +90,10 @@ marquee a:hover {
 
 .rt-chip {
 
+}
+
+.search-box > p {
+    padding: 0 1rem 1rem 1rem;
 }
 
 .loading-us, .loading-state {
@@ -132,4 +136,12 @@ label {
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     margin-right: 6px;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+    color: #1565c0;
+}
+
+input.select-dropdown {
+    color: #1565c0;
 }
