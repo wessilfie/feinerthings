@@ -71,14 +71,17 @@ cb.__call("search_tweets",
   },
 
   function(result){
-  	// console.log(result);
+
     var statuses = result && result.statuses;
+    $(".tweet_entry").html("");
+    i = 0;
     if (statuses && Array.isArray(statuses) && statuses.length)
     {
-
-      $(".tweet_entry").html("");
+      
+      
       statuses.forEach(function (status) {
-        // console.log(JSON.stringify(status['text'], null, 4))
+        i = i + 1;
+
         tweet_img = "";
         if (typeof status.entities.media !== 'undefined') {
             // there's media
@@ -98,12 +101,20 @@ cb.__call("search_tweets",
         tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>';
         card_link = '<div class="card-action">' +  '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + card_end;
         tweet_card = card_begin + tweet_text + card_end + card_link + card_end;
+        
 
         $('.tweet_entry').append(tweet_card);
 
-      })
+      }
+      )
+
 
     }
+    
+    if (i == 0){
+        $('.tweet_entry').append("Sorry, no tweets were found. Try searching another trend or location!");
+      }
+
   }
 
   )
@@ -120,10 +131,12 @@ cb.__call("search_tweets",
     function(result){
       // console.log(result);
       var statuses = result && result.statuses;
+      $(".tweet_us_entry").html("");
+      i = 0;
       if (statuses && Array.isArray(statuses) && statuses.length)
       {
         console.log("in loop");
-        $(".tweet_us_entry").html("");
+        i = i + 1;
         statuses.forEach(function (status) {
             tweet_img = ""; // no img by default
             if (typeof status.entities.media !== 'undefined') {
@@ -150,6 +163,9 @@ cb.__call("search_tweets",
           // $('.tweet_us_entry').append('<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>');
         })
 
+      }
+      if (i == 0){
+        $('.tweet_us_entry').append("Sorry, no tweets were found. Try searching another trend!");
       }
     }
 
