@@ -119,16 +119,20 @@ cb.__call("search_tweets",
                         '@' + profile_name +
                         card_end;
 
+        retweet_chip = '<div class="chip rt-chip">RT: ' +
+                        + status.retweet_count +
+                        card_end;
+
         profile_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" >' + profile_chip + '</a>';
-        tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="at_end waves-effect waves-light btn tweet-btn">' +
-                      '<i class="fa fa-twitter" aria-hidden="true"></i>' +
-                      'View Tweet </a>';
+        tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="">' +
+                      '<div class="chip tweet-btn">' +
+                      '<i class="fa fa-twitter" aria-hidden="true"></i>View Tweet</div></a>';
 
         tweet_text = JSON.stringify(status['text'], null, 4)
         // $('.tweet_entry').append('<p>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' + '<hr>');
         card_begin = '<div class="card">' + tweet_img + '<div class="card-content">';
-        tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>';
-        card_link = '<div class="card-action">' + profile_link + tweet_link + card_end;
+        tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>Created at ' + status.created_at.slice(0,19) + '</em>';
+        card_link = '<div class="card-action">' + profile_link + tweet_link + retweet_chip + card_end;
         tweet_card = card_begin + tweet_text + card_end + card_link + card_end;
 
 
@@ -188,17 +192,20 @@ cb.__call("search_tweets",
                           '<img src="' + profile_img_url + '" alt="' + profile_name + '">' +
                           '@' + profile_name +
                           card_end;
+          retweet_chip = '<div class="chip rt-chip">RT: ' +
+                          + status.retweet_count +
+                          card_end;
 
           profile_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" >' + profile_chip + '</a>';
-          tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="at_end waves-effect waves-light btn tweet-btn">' +
-                        '<i class="fa fa-twitter" aria-hidden="true"></i>' +
-                        'View Tweet </a>';
+          tweet_link = '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + 'class="">' +
+                        '<div class="chip tweet-btn">' +
+                        '<i class="fa fa-twitter" aria-hidden="true"></i>View Tweet</div></a>';
 
           tweet_text = JSON.stringify(status['text'], null, 4)
           // $('.tweet_entry').append('<p>' + JSON.stringify(status['text'], null, 4) + '</p>' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '" target="_blank"' + '" class="at_end" > User Info</a>' + ' ' + '<a href="' + 'http://twitter.com/' + status.user.screen_name + '/status/' + status.id_str + '" target="_blank"' + '" class="at_end" >Go to This Tweet</a>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>' + '<hr>');
           card_begin = '<div class="card">' + tweet_img + '<div class="card-content">';
           tweet_text = '<p style="word-break:break-word;">' + JSON.stringify(status['text'], null, 4) + '</p>' + '<em>   Retweeted: ' + status.retweet_count + '   Created at ' + status.created_at.slice(0,19) + '</em>';
-          card_link = '<div class="card-action">' + profile_link + tweet_link + card_end;
+          card_link = '<div class="card-action">' + profile_link + tweet_link + retweet_chip + card_end;
           tweet_card = card_begin + tweet_text + card_end + card_link + card_end;
 
           $('.tweet_us_entry').append(tweet_card);
