@@ -15,22 +15,38 @@ function getTrends(location) {
 cb.__call("trends_place",
             /* expects a WOEID or 1 for worldwide; we currently default to U.S. */
           {id: location},
+
           function (result_trends){
+
+            document.getElementById("state_trends").innerHTML = "No trends found for this state.";
             console.log(result_trends);
             var trend_list = "";
+            if (result_trends[0].hasOwnProperty('trends')){
+
+            
             var trend_set = result_trends[0].trends;
               if(typeof trend_set != "undefined") {
                 /* we'll make a list of trending topics */
+                i = 0;
                 for(var trend in trend_set) {
+                  i++;
+                  if (i > 5){
+                    break;
+                  }
                   var hyperlink = "<a href=\"" + trend_set[trend].url + "\" target=\"_blank\">"  + trend_set[trend].name + "</a>  \xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+        
                     trend_list += (hyperlink + "\t");
                 }
               }
+
+            }
               else {
                 //if we can't get trends, make a default list
                 var trend_list = "We're currently having issues pulling current trends.";
               }
-            document.getElementById("trends").innerHTML = trend_list;
+
+
+            document.getElementById("state_trends").innerHTML = trend_list;
           });
 }
 
@@ -202,6 +218,7 @@ $(document).ready(function() {
     e.preventDefault(); //prevent a submit button from submitting a form.
     var hashtag =  document.getElementById("hashtag").value;
     var location = document.getElementById("location").value;
+
     document.getElementById("location_name").innerHTML = location;
     hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
     console.log('hashtag: ' + hashtag);
@@ -221,6 +238,7 @@ window.onload=function(){
   $('#map').usmap({
     'click': function(event, data) {
       getTrends(state_dict[data.name]);
+      document.getElementById("cur_state").innerHTML = data.name;
   }
       }
   );
