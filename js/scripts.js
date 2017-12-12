@@ -144,7 +144,7 @@ cb.__call("search_tweets",
     }
 
     if (i == 0){
-        $('.tweet_entry').append("Sorry, no tweets were found. Try searching another trend or location!");
+        // $('.tweet_entry').append("Sorry, no tweets were found. Try searching another trend or location!");
         $('.output-error-state').addClass('visible');
      }
 
@@ -214,7 +214,7 @@ cb.__call("search_tweets",
 
       }
       if (i == 0){
-        $('.tweet_us_entry').append("Sorry, no tweets were found. Try searching another trend!");
+        // $('.tweet_us_entry').append("Sorry, no tweets were found. Try searching another trend!");
         $('.output-error-us').addClass('visible');
 
       }
@@ -229,7 +229,13 @@ $(document).ready(function() {
     var hashtag =  document.getElementById("hashtag").value;
     var location = document.getElementById("location").value;
 
-    document.getElementById("location_name").innerHTML = location;
+    if (location.selectedIndex == -1)
+        return null;
+
+    var state = document.getElementById("location");
+    state = state.options[state.selectedIndex].text;
+
+    document.getElementById("location_name").innerHTML = state;
     hashtag = hashtag.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
     console.log('hashtag: ' + hashtag);
     $('.loading-us').addClass('visible');
