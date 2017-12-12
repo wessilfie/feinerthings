@@ -154,4 +154,9 @@ input.select-dropdown {
     position: fixed;
     width: 100%;
     bottom: 0;
+    padding-top: 8px;
+}
+
+.page-footer p {
+    margin: 0 !important;
 }
